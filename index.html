@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VEXO — Arcade & Wallet</title><link rel="stylesheet" href="styles.css">
+</head><body>
+<div class="glow"></div><header class="top"><a class="brand" href="#"><span class="mark">V</span><span>VEXO<small>ARCADE NETWORK</small></span></a><div class="top-right"><span id="connection" class="pill">Connecting…</span><button id="logout" class="btn secondary hidden">Sign out</button><a class="btn secondary" href="admin.html">Admin</a></div></header>
+<main class="wrap">
+<section id="authView" class="auth-layout">
+  <div class="intro"><div class="eyebrow">PLAY · EARN · COMPETE</div><h1>Enter the <span>VEXO</span><br>universe.</h1><p>Your profile and wallet are saved to Firebase. Game rewards are validated on the server—not trusted to browser code.</p><div class="coin-row"><div><b>VXB</b><small>VEXO Bit</small></div><div><b>GOLD</b><small>Daily admin cap</small></div><div><b>LIVE</b><small>Cloud-backed</small></div></div></div>
+  <div class="panel auth-panel"><div class="tabs"><button id="registerTab" class="tab active">Create account</button><button id="loginTab" class="tab">Sign in</button></div>
+    <form id="authForm"><div id="nameWrap" class="field"><label>DISPLAY NAME</label><input id="displayName" maxlength="48" placeholder="Your display name" required></div>
+    <div id="usernameWrap" class="field"><label>USERNAME</label><input id="username" maxlength="24" pattern="[A-Za-z0-9_.-]{3,24}" placeholder="unique_handle" required></div>
+    <div class="field"><label>EMAIL</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+    <div class="field"><label>PASSWORD</label><input id="password" type="password" minlength="8" autocomplete="current-password" placeholder="At least 8 characters" required></div>
+    <div id="confirmWrap" class="field"><label>CONFIRM PASSWORD</label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Repeat password" required></div>
+    <button id="authSubmit" class="btn full" type="submit">Create account ↗</button><p id="authHint" class="muted small">Use an email you can access. Never reuse a sensitive password.</p></form>
+  </div>
+</section>
+<section id="appView" class="hidden">
+  <div class="welcome"><div><div class="eyebrow">YOUR VEXO SPACE</div><h1>Hey, <span id="helloName">Player</span>.</h1><p class="muted">Your balance syncs with Firebase in real time.</p></div><div class="user-chip"><span class="avatar" id="avatar">V</span><div><b id="userHandle">@player</b><small id="memberSince">Member</small></div></div></div>
+  <div class="balances">
+    <article class="balance gold"><small>GOLD VEXO COIN</small><strong id="gold">0</strong><span>1 Gold = 1,000 Silver</span></article>
+    <article class="balance silver"><small>SILVER VEXO COIN</small><strong id="silver">250</strong><span>1 Silver = 1,000 Bronze</span></article>
+    <article class="balance bronze"><small>BRONZE VEXO COIN</small><strong id="bronze">500</strong><span>1 Silver = 2,000 VXB</span></article>
+    <article class="balance vxb"><small>VEXO BIT · VXB</small><strong id="vxb">100</strong><span>Server-validated rewards</span></article>
+  </div>
+  <section class="panel exchange-panel"><div class="section-head"><div><div class="eyebrow">WALLET / CONVERSION</div><h2>Exchange coins</h2><p class="muted">Conversions are validated and recorded on the server.</p></div></div><form id="convertForm" class="convert-form"><div><label>FROM</label><select id="convertFrom"><option value="gold">Gold VEXO Coin</option><option value="silver">Silver VEXO Coin</option><option value="bronze">Bronze VEXO Coin</option><option value="vxb">VEXO Bit (VXB)</option></select></div><div><label>TO</label><select id="convertTo"><option value="silver">Silver VEXO Coin</option><option value="gold">Gold VEXO Coin</option><option value="bronze">Bronze VEXO Coin</option><option value="vxb">VEXO Bit (VXB)</option></select></div><div><label>AMOUNT</label><input id="convertAmount" type="number" min="1" step="1" placeholder="Whole number" required></div><button class="btn" type="submit">Convert coins ↗</button></form><p id="conversionHint" class="muted small">1 Gold = 1,000 Silver · 1 Silver = 1,000 Bronze · 1 Silver = 2,000 VXB.</p></section>
+  <div class="main-grid">
+    <section class="panel game"><div class="section-head"><div><div class="eyebrow">ARCADE / 01</div><h2>Rock · Paper · Scissors</h2><p id="gameSub" class="muted">Beat the bot to earn VXB. A loss costs VXB.</p></div><div class="mode-actions"><button id="botMode" class="btn secondary mode-active">Play bot</button><button id="onlineMode" class="btn secondary">Online PvP</button></div></div>
+      <div id="onlinePanel" class="notice hidden" style="margin-top:14px"><b>Online matchmaking · 40 VXB stake</b><p id="matchStatus" class="small">Find an opponent. Both players stake 40 VXB; winner takes 80 VXB. Draw refunds both.</p><button id="findOnline" class="btn" type="button">Find online opponent</button></div>
+      <div class="stakes"><div><small>WIN</small><b>+25 VXB</b></div><div><small>LOSS</small><b>−8 VXB</b></div><div><small>DRAW</small><b>−2 VXB</b></div><div><small>DAILY EARN CAP</small><b>1,000 VXB</b></div></div>
+      <div class="moves"><button class="move" data-move="rock"><span>✊</span><b>Rock</b></button><button class="move" data-move="paper"><span>✋</span><b>Paper</b></button><button class="move" data-move="scissors"><span>✌️</span><b>Scissors</b></button></div>
+      <div id="gameResult" class="result"><span class="result-icon">⚡</span><b>Choose your move</b><p>Your round is resolved securely by Firebase Cloud Functions.</p></div>
+      <div class="game-actions"><button id="airdrop" class="btn secondary">Claim daily VXB drop</button><span id="dailyStatus" class="muted small">20–80 VXB · once per UTC day</span></div>
+    </section>
+    <aside class="panel profile"><div class="eyebrow">PLAYER CARD</div><h2 id="profileName">Player</h2><p id="profileBio" class="muted">New to VEXO</p><div class="stat-grid"><div><small>GAMES</small><b id="games">0</b></div><div><small>WINS</small><b id="wins">0</b></div><div><small>WIN RATE</small><b id="winRate">0%</b></div><div><small>NET VXB</small><b id="net">0</b></div></div>
+      <form id="profileForm" class="profile-form"><label>Display name</label><input id="editName" maxlength="48" required><label>About you</label><textarea id="editBio" maxlength="240" rows="3" placeholder="A little about yourself"></textarea><button class="btn secondary full" type="submit">Save profile</button></form>
+    </aside>
+  </div>
+  <section class="panel leaderboard"><div class="section-head"><div><div class="eyebrow">COMMUNITY</div><h2>Leaderboard</h2></div><button id="refreshBoard" class="btn secondary">Refresh ↻</button></div><div class="table-wrap"><table><thead><tr><th>#</th><th>PLAYER</th><th>VXB</th><th>GAMES</th><th>WINS</th></tr></thead><tbody id="leaderboard"><tr><td colspan="5">Loading leaderboard…</td></tr></tbody></table></div></section>
+</section>
+<div id="toast" class="toast hidden"></div>
+<footer>VEXO · Online account and server-validated bot rewards. No real-money or blockchain assets are connected.</footer>
+</main>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-functions-compat.js"></script>
+<script src="firebase-config.js"></script><script src="app.js"></script>
+</body></html>
