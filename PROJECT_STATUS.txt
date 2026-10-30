@@ -1,0 +1,4 @@
+Firebase Authentication and player profile integration added to index.html.
+Email/password and Google sign-in require Firebase provider setup and authorized domain.
+Only /profiles/{uid} is connected to Realtime Database.
+Game rewards, balances, payments, multiplayer, and admin authorization are still demo-only.

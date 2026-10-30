@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" data-sites-preview-theme="custom">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VEXO — Player Portal</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div id="app" class="logged-out">
+<section id="loginScreen" aria-label="VEXO account access">
+  <div class="login-art"><div class="login-brand"><span class="login-brand-mark">V</span><span>VEXO</span></div><div><div class="eyebrow"><span class="dot"></span> YOUR NEXT LEVEL STARTS HERE</div><h1>Enter the arena.<br><span class="gradient-text">Become VEXO.</span></h1><p>One account for your player profile, missions, arena progress, and the VEXO universe.</p><div class="login-perks"><span>✦ Player profile</span><span>◈ Daily missions</span><span>⌁ Arena progress</span></div></div><div style="color:#756b80;font-size:10px">VEXO · PLAYER ACCESS</div></div>
+  <div class="login-card-wrap"><div class="login-card"><div class="eyebrow"><span class="dot"></span> PLAYER PORTAL</div><h2 id="loginTitle" style="margin-top:18px">Welcome back</h2><p class="login-subtitle" id="loginSubtitle">Sign in to continue to your VEXO dashboard.</p><div class="login-tabs"><button id="signInTab" class="active" type="button" onclick="setLoginMode('signin')">Sign in</button><button id="signUpTab" type="button" onclick="setLoginMode('signup')">Create account</button></div><form id="loginForm" onsubmit="event.preventDefault();showLoginMessage();"><label class="login-field">Email address<input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required></label><label class="login-field">Password<input id="loginPassword" type="password" placeholder="Enter your password" autocomplete="current-password" minlength="8" required></label><label class="login-field" id="confirmPasswordField" style="display:none">Confirm password<input id="confirmPassword" type="password" placeholder="Repeat your password" autocomplete="new-password" minlength="8"></label><button class="login-submit" id="loginSubmit" type="submit">Sign in securely →</button></form><div class="login-divider">OR CONTINUE WITH</div><button class="login-google" type="button" onclick="showGoogleMessage()">◎ &nbsp; Continue with Google</button><div class="login-message" id="loginMessage" role="status" aria-live="polite"></div><p class="login-footnote">Secure account access is planned. This preview does not send or store passwords; Firebase Authentication must be connected before real sign-in or registration can work.</p></div></div>
+</section>
+<div class="device-toolbar"><span class="preview-label">VEXO RESPONSIVE PREVIEW</span><button id="desktopMode" class="active" onclick="setPreviewMode('desktop')">Desktop view</button><button id="mobileMode" onclick="setPreviewMode('mobile')">Phone view</button><span>Preview only · not a live deployment</span></div>
+<header><div class="container nav">
+  <div class="brand"><div class="brand-mark">V</div><span>VEXO</span></div>
+  <nav class="nav-links"><a href="#game">Play</a><a href="#missions">Missions</a><a href="#profile">Profile</a><a href="#gold">Gold Packs</a><a href="#tonkeeper">TON / Tonkeeper</a><a href="#items">Power-ups</a><a href="#god-admin">Admin</a></nav>
+  <div class="nav-actions"><div class="balance">YOUR BALANCE&nbsp; <strong>0.00 Gold</strong></div><button class="btn btn-primary" onclick="document.querySelector('#gold').scrollIntoView({behavior:'smooth'})">Explore Store ↗</button></div>
+</div></header>
+<main class="container">
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> THE VEXO EXCHANGE · STORE</div>
+    <h1>Power up.<br><span class="gradient-text">Play beyond.</span></h1>
+    <p>Upgrade your VEXO experience with Gold packs, exclusive boosts, and premium player perks. Built for players who want more from every match.</p>
+    <div class="hero-buttons"><button class="btn btn-primary" onclick="document.querySelector('#gold').scrollIntoView({behavior:'smooth'})">Shop Gold Packs <span>↗</span></button><button class="btn btn-quiet" onclick="document.querySelector('#items').scrollIntoView({behavior:'smooth'})">Explore upgrades</button></div>
+    <div class="trust-row"><span>✦ <b>Instant wallet credit</b> after verified payment</span><span>⌁ <b>Player-first</b> experience</span></div>
+  </div>
+  <div class="coin-stage"><div class="orbit"></div><div class="coin"><div class="coin-inner">V</div></div><div class="float-tag tag-top"><small>Gold unit price</small><strong>$4.00 <span style="font-size:11px;color:#ff83c8">USD</span></strong></div><div class="float-tag tag-bottom"><small>VEXO player perks</small><strong>Unlock your edge <span style="color:#ff83c8">✦</span></strong></div></div>
+</section>
+<section id="game" class="feature-panel">
+  <div class="eyebrow"><span class="dot"></span> VEXO ARENA · DEMO</div>
+  <h2>Rock · Paper · <span class="gradient-text">Scissors</span></h2>
+  <p>Play against the bot in this local preview. The result is only a demonstration: it does not change a real wallet, Gold balance, or Firebase record.</p>
+  <div class="feature-grid"><div class="feature-stat"><small>Gold balance · demo</small><strong id="demoGold">0</strong></div><div class="feature-stat"><small>Vexo Bit · demo</small><strong id="demoVxb">0</strong></div><div class="feature-stat"><small>Daily Gold limit</small><strong>100 Gold</strong></div></div>
+  <div class="game-controls"><button class="btn btn-quiet" onclick="playDemo('rock')">✊ Rock</button><button class="btn btn-quiet" onclick="playDemo('paper')">✋ Paper</button><button class="btn btn-quiet" onclick="playDemo('scissors')">✌ Scissors</button></div>
+  <div class="game-result" id="gameResult" aria-live="polite">Choose Rock, Paper, or Scissors to try a demo round.</div>
+  <p><strong>Currency rules requested for VEXO:</strong> 1 Gold = 1,000 Silver; 1 Silver = 1,000 Bronze; 1 Silver = 2,000 VXB. These are planned game rules, not on-chain conversion rates.</p>
+</section>
+<section id="missions" class="feature-panel">
+  <div class="eyebrow"><span class="dot"></span> DAILY LOOP · DEMO</div>
+  <h2>Daily missions &amp; <span class="gradient-text">player progress</span></h2>
+  <p>Build a daily habit with clear objectives, streaks, and a leaderboard preview. Rewards below are simulated in this browser only; the live version must validate every mission on the server and enforce the 100 Gold daily cap.</p>
+  <div class="feature-grid"><div class="feature-stat"><small>Daily streak · preview</small><strong id="streakValue">0 days</strong></div><div class="feature-stat"><small>Missions claimed · preview</small><strong id="missionCount">0 / 3</strong></div><div class="feature-stat"><small>Daily Gold cap</small><strong>100 Gold</strong></div></div>
+  <div class="mission-grid" style="margin-top:16px">
+    <article class="mission-card"><h3>🎮 First Match</h3><p>Play one Rock, Paper, Scissors demo round.</p><div class="mission-reward"><span>Reward preview</span><span>+20 Silver</span></div><button class="btn btn-quiet" id="missionMatch" onclick="claimMission('match',this)">Claim demo mission</button></article>
+    <article class="mission-card"><h3>⚡ Arena Regular</h3><p>Try three rounds and learn the match flow.</p><div class="mission-reward"><span>Reward preview</span><span>+40 Silver</span></div><button class="btn btn-quiet" id="missionRounds" onclick="claimMission('rounds',this)">Claim demo mission</button></article>
+    <article class="mission-card"><h3>🛡️ Account Ready</h3><p>Review your profile and account security checklist.</p><div class="mission-reward"><span>Reward preview</span><span>+1,000 VXB</span></div><button class="btn btn-quiet" id="missionProfile" onclick="claimMission('profile',this)">Claim demo mission</button></article>
+  </div>
+  <div class="notice" id="missionStatus" aria-live="polite">Demo mode: claims only change this preview page. No real balance or server record is updated.</div>
+</section>
+<section id="profile" class="feature-panel">
+  <div class="eyebrow"><span class="dot"></span> PLAYER ACCOUNT · PREVIEW</div>
+  <h2>Your <span class="gradient-text">VEXO profile</span></h2>
+  <p>Layout preview for registration and profile. This form is not connected to Firebase and must not be used to submit a real password.</p>
+  <form class="profile-form" onsubmit="event.preventDefault();document.getElementById('profileStatus').textContent='Preview only: account creation is not connected. Connect Firebase Authentication and secure database rules before using real accounts.';">
+    <label>Username<input placeholder="Choose a username" autocomplete="off"></label><label>Email address<input type="email" placeholder="you@example.com" autocomplete="off"></label><label>Password<input type="password" placeholder="Preview only — do not enter a real password" autocomplete="off"></label><label>Player ID<input value="Generated after secure registration" readonly></label><div class="wide"><button class="btn btn-primary" type="submit">Preview registration</button></div>
+  </form>
+  <div class="game-result" id="profileStatus" aria-live="polite">Account, profile, and balances will need Firebase Authentication and database rules.</div>
+</section>
+<section class="feature-panel" id="dashboard">
+  <div class="eyebrow"><span class="dot"></span> PLAYER INTELLIGENCE · PREVIEW</div>
+  <h2>Activity &amp; <span class="gradient-text">rankings</span></h2>
+  <p>A clearer player dashboard concept: recent activity, leaderboard, and account protection indicators. The sample rows are fictional demo data, not live users or transactions.</p>
+  <div class="dashboard-grid">
+    <div class="feature-stat"><small>Season rank · sample</small><strong>#128</strong></div><div class="feature-stat"><small>Win rate · sample</small><strong>62%</strong></div><div class="feature-stat"><small>Matches · sample</small><strong>24</strong></div>
+  </div>
+  <div class="dashboard-grid" style="margin-top:16px">
+    <div class="mission-card"><h3>🏆 Arena leaderboard</h3><table class="leaderboard"><thead><tr><th>Rank</th><th>Player</th><th>Score</th></tr></thead><tbody><tr><td>01</td><td>NeonFox</td><td>9,420</td></tr><tr><td>02</td><td>VexoNova</td><td>8,870</td></tr><tr><td>03</td><td>PinkCipher</td><td>8,110</td></tr><tr><td>128</td><td>You · sample</td><td>1,240</td></tr></tbody></table></div>
+    <div class="mission-card"><h3>↗ Recent activity</h3><div class="activity-list"><div class="activity-row"><span>Daily mission · demo</span><strong>+20 Silver</strong></div><div class="activity-row"><span>Arena match · demo</span><strong>+200 VXB</strong></div><div class="activity-row"><span>Store purchase</span><strong>Not connected</strong></div><div class="activity-row"><span>Wallet transaction</span><strong>Not connected</strong></div></div></div>
+  </div>
+  <h3 style="margin:22px 0 6px;font-size:14px">Security checklist</h3>
+  <div class="security-grid"><div class="security-tile"><small>Authentication</small><strong>Not connected</strong></div><div class="security-tile"><small>Database rules</small><strong>Not deployed</strong></div><div class="security-tile"><small>Payment verification</small><strong>Not connected</strong></div><div class="security-tile"><small>2-step verification</small><strong>Planned</strong></div></div>
+</section>
+<section id="gold">
+  <div class="section-head"><div><h2>Choose your <span class="gradient-text">Gold pack</span></h2><p>Clear pricing. Choose a pack and review payment details before continuing.</p></div><div class="pill">1 Gold = $4.00 USD · Proposed price</div></div>
+  <div class="packages">
+    <article class="pack"><div class="pack-label">Starter</div><div class="pack-coin">V</div><h3>First Spark</h3><p class="desc">A simple start for your VEXO journey.</p><div class="price-row"><span class="price">$4</span><span class="price-note">USD</span></div><div class="unit">1 Gold · $4.00 per Gold</div><button class="btn btn-quiet" onclick="openCheckout('First Spark',1,4)">Choose pack →</button></article>
+    <article class="pack featured"><div class="ribbon">POPULAR</div><div class="pack-label">Best value</div><div class="pack-coin">V</div><h3>Neon Boost</h3><p class="desc">More room to unlock store upgrades.</p><div class="price-row"><span class="price">$20</span><span class="price-note">USD</span></div><div class="unit">5 Gold · $4.00 per Gold</div><button class="btn btn-primary" onclick="openCheckout('Neon Boost',5,20)">Choose pack →</button></article>
+    <article class="pack"><div class="pack-label">Power user</div><div class="pack-coin">V</div><h3>Ultra Vault</h3><p class="desc">Stock up for your next big session.</p><div class="price-row"><span class="price">$40</span><span class="price-note">USD</span></div><div class="unit">10 Gold · $4.00 per Gold</div><button class="btn btn-quiet" onclick="openCheckout('Ultra Vault',10,40)">Choose pack →</button></article>
+  </div>
+</section>
+<section id="tonkeeper" class="feature-panel">
+  <div class="eyebrow"><span class="dot"></span> TON BLOCKCHAIN · PLANNED INTEGRATION</div>
+  <h2>VEXO on <span class="gradient-text">Tonkeeper</span></h2>
+  <p>Target setup: a TON Jetton with an initial supply of 1,000,000,000 VEXO. New minting is intended to be restricted to the authorized admin. This panel is a project specification only; no token contract has been deployed and Tonkeeper is not connected yet.</p>
+  <div class="feature-grid"><div class="feature-stat"><small>Initial supply target</small><strong>1,000,000,000</strong></div><div class="feature-stat"><small>Network during development</small><strong>Testnet only</strong></div><div class="feature-stat"><small>Wallet connection</small><strong>Not connected</strong></div></div>
+  <div class="admin-powers"><span>Admin-only minting · requires contract enforcement</span><span>Game rewards · server verified</span><span>Store payments · transaction verified</span></div>
+  <div class="notice"><strong>Not live yet:</strong> wallet connection, token deployment, purchase invoices, payment confirmation, and automatic Gold credit are not implemented. Never trust a payment screenshot or a success message from the browser; the backend must verify the correct token contract, recipient, amount, and unique order before fulfilling a purchase.</div>
+</section>
+<section id="items">
+  <div class="section-head"><div><h2>Premium <span class="gradient-text">upgrades</span></h2><p>Illustrative digital items. Final availability and pricing can be configured by VEXO.</p></div><div class="pill">Digital items</div></div>
+  <div class="store-grid">
+    <article class="item"><div class="item-icon"><svg viewBox="0 0 100 100" fill="none"><path d="M50 8 62 36 92 39 70 59 76 89 50 74 24 89 30 59 8 39 38 36Z" stroke="#ff77c6" stroke-width="3" fill="#ff3da822"/><circle cx="50" cy="49" r="12" stroke="#ffd8ed" stroke-width="3"/></svg></div><h3>XP Surge</h3><p>Boost your progression with a temporary XP multiplier.</p><div class="item-foot"><span class="item-price">3 Gold</span><button class="btn btn-quiet" onclick="openItem('XP Surge',3)">View item</button></div></article>
+    <article class="item"><div class="item-icon"><svg viewBox="0 0 100 100" fill="none"><path d="M50 9 80 26 80 61 50 89 20 61 20 26Z" stroke="#bd8cff" stroke-width="3" fill="#9d5cff20"/><path d="M35 48 46 59 66 36" stroke="#f7eaff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="49" r="34" stroke="#bd8cff" stroke-opacity=".45"/></svg></div><h3>Elite Badge</h3><p>Show off your status with an exclusive profile badge.</p><div class="item-foot"><span class="item-price">8 Gold</span><button class="btn btn-quiet" onclick="openItem('Elite Badge',8)">View item</button></div></article>
+    <article class="item"><div class="item-icon"><svg viewBox="0 0 100 100" fill="none"><path d="M50 10 61 39 91 50 61 61 50 90 39 61 9 50 39 39Z" stroke="#ff9fd6" stroke-width="3" fill="#ff3da822"/><path d="M50 28V72M28 50H72" stroke="#ffe5f4" stroke-width="2"/></svg></div><h3>Neon Profile Theme</h3><p>Give your player profile a bold, custom neon look.</p><div class="item-foot"><span class="item-price">12 Gold</span><button class="btn btn-quiet" onclick="openItem('Neon Profile Theme',12)">View item</button></div></article>
+  </div>
+</section>
+<section class="admin-preview" id="god-admin">
+  <div><div class="god-chip">✦ GOD · OWNER ROLE</div><h2>God Admin <span class="gradient-text">Unlimited Access</span></h2><p>The GOD account is intended to have unrestricted VEXO game administration: user management, balance adjustments, daily limits, bans, transaction review, and settings. This card is a design preview only; real permissions must be granted securely on the Firebase server and must never rely on a hidden button or a client-side code.</p><div class="admin-powers"><span>Unlimited game controls</span><span>User &amp; wallet management</span><span>Limits &amp; bans</span><span>Audit history</span></div></div>
+  <button class="btn btn-quiet" onclick="showGodNotice()">Admin setup status ↗</button>
+</section>
+<section id="benefits" class="perks">
+  <div class="perk"><div class="perk-icon">⌁</div><div><strong>Transparent pricing</strong><p>Gold packs are priced in USD and show the amount before checkout.</p></div></div>
+  <div class="perk"><div class="perk-icon">◈</div><div><strong>Verified payments</strong><p>Production orders should be credited only after backend verification.</p></div></div>
+  <div class="perk"><div class="perk-icon">♢</div><div><strong>Player support</strong><p>Keep purchase IDs and transaction history for support and refunds.</p></div></div>
+</section>
+<div class="notice"><strong>Prototype notice:</strong> This is a visual store preview. Checkout is not connected to Bcon, Tonkeeper, or Firebase, no payment is taken, and no Gold is credited. The GOD role shown above is a design specification, not an active account permission. Before launch, confirm that the payment provider permits VEXO's redeemable Gold model and add server-side payment verification, refunds, and clear token terms.</div>
+</main>
+<footer><div class="container footer-row"><span><strong>VEXO</strong> · Play beyond limits.</span><span>Prices shown in USD · Prototype store · Not a live financial offer</span></div></footer>
+<div class="modal-backdrop" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="if(event.target===this)closeCheckout()"><div class="modal">
+  <div class="modal-head"><h3 id="modalTitle">Review your order</h3><button class="close" aria-label="Close" onclick="closeCheckout()">×</button></div>
+  <p id="modalDescription">Review your selection. This prototype does not process payments.</p>
+  <div class="checkout-summary"><div><small id="orderName">Neon Boost</small><strong id="orderGold">5 Gold</strong></div><strong id="orderPrice">$20.00</strong></div>
+  <p style="margin-bottom:7px;color:#e6ddec;font-weight:700">Payment method preview</p>
+  <div class="networks"><button class="network selected" onclick="chooseNetwork(this)">₮ USDT <small>TRON / TRC-20</small></button><button class="network" onclick="chooseNetwork(this)">◎ USDC <small>Supported network only</small></button><button class="network" onclick="chooseNetwork(this)">₿ Bitcoin <small>BTC network</small></button><button class="network" onclick="chooseNetwork(this)">◆ Ethereum <small>ETH network</small></button><button class="network" onclick="chooseNetwork(this)">💎 TON <small>Tonkeeper / TON network</small></button></div>
+  <button class="btn btn-primary" onclick="showDemoStatus()">Continue to payment preview ↗</button>
+  <div class="status" id="paymentStatus">Demo only: no invoice was created and no payment was made. Connect a verified backend and confirm provider approval before enabling checkout.</div>
+  <p style="font-size:10px;margin-bottom:0">A live integration must create invoices on the server and verify the payment independently before crediting Gold.</p>
+</div></div>
+</div>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/game.js"></script>
+<script src="js/store.js"></script>
+<script src="js/admin.js"></script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js';
+import { getDatabase, ref, get, set, update, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyAScL8FLPlYhUJy0Zmd63Q43Pdsz8Hf29o',
+  authDomain: 'vexo-v2.firebaseapp.com',
+  databaseURL: 'https://vexo-v2-default-rtdb.firebaseio.com',
+  projectId: 'vexo-v2',
+  storageBucket: 'vexo-v2.firebasestorage.app',
+  messagingSenderId: '838839615203',
+  appId: '1:838839615203:web:84656ae8123749c9258fd6'
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const googleProvider = new GoogleAuthProvider();
+let activeUser = null;
+const message = document.getElementById('loginMessage');
+const profileStatus = document.getElementById('profileStatus');
+
+// Replace the preview-only profile form with real profile fields.
+const profileForm = document.querySelector('.profile-form');
+profileForm.id = 'firebaseProfileForm';
+profileForm.innerHTML = '<label>Username<input id="profileUsername" maxlength="24" autocomplete="nickname" required></label><label>Email address<input id="profileEmail" type="email" readonly></label><label class="wide">Player ID<input id="profileUid" readonly></label><div class="wide"><button class="btn btn-primary" type="submit">Save profile</button></div>';
+const usernameField = document.createElement('label');
+usernameField.className = 'login-field';
+usernameField.id = 'firebaseUsernameField';
+usernameField.style.display = 'none';
+usernameField.textContent = 'Username';
+usernameField.insertAdjacentHTML('beforeend', '<input id="firebaseSignupUsername" type="text" maxlength="24" placeholder="Choose a player name" autocomplete="nickname">');
+document.getElementById('loginEmail').parentElement.before(usernameField);
+const signOutButton = document.createElement('button');
+signOutButton.className = 'btn btn-quiet';
+signOutButton.type = 'button';
+signOutButton.textContent = 'Sign out';
+signOutButton.addEventListener('click', () => signOut(auth).catch(showProfileError));
+document.querySelector('.nav-actions').prepend(signOutButton);
+
+function showAuthMessage(text, isError = false) {
+  message.textContent = text;
+  message.classList.add('show');
+  message.style.background = isError ? '#ff526b18' : '#f0bc6610';
+  message.style.borderColor = isError ? '#ff526b55' : '#f0bc6630';
+}
+function friendlyError(error) {
+  const known = {
+    'auth/email-already-in-use': 'This email already has an account. Please sign in.',
+    'auth/invalid-email': 'Please enter a valid email address.',
+    'auth/invalid-credential': 'Email or password is incorrect.',
+    'auth/weak-password': 'Choose a stronger password (at least 8 characters).',
+    'auth/popup-closed-by-user': 'The Google sign-in window was closed before finishing.',
+    'auth/unauthorized-domain': 'This website domain is not authorized in Firebase Authentication.',
+    'auth/network-request-failed': 'Network error. Check your internet connection and try again.'
+  };
+  return known[error.code] || `Firebase error: ${error.code || error.message}`;
+}
+function showProfileError(error) { profileStatus.textContent = friendlyError(error); }
+async function ensurePlayerProfile(user, preferredName = '') {
+  const profileRef = ref(db, `profiles/${user.uid}`);
+  const snapshot = await get(profileRef);
+  const existing = snapshot.exists() ? snapshot.val() : {};
+  const displayName = (preferredName || existing.displayName || user.displayName || (user.email || 'player').split('@')[0]).trim().slice(0, 24);
+  await set(profileRef, {
+    displayName,
+    email: user.email || '',
+    createdAt: existing.createdAt || serverTimestamp(),
+    updatedAt: serverTimestamp()
+  });
+  return displayName;
+}
+
+window.showLoginMessage = async function () {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const signup = document.getElementById('signUpTab').classList.contains('active');
+  const username = document.getElementById('firebaseSignupUsername').value.trim();
+  if (signup && password !== document.getElementById('confirmPassword').value) {
+    showAuthMessage('The passwords do not match. Please check them and try again.', true);
+    return;
+  }
+  if (signup && !username) { showAuthMessage('Please choose a username.', true); return; }
+  const submit = document.getElementById('loginSubmit');
+  submit.disabled = true;
+  submit.textContent = 'Please wait…';
+  try {
+    if (signup) {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await ensurePlayerProfile(result.user, username);
+    } else {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      await ensurePlayerProfile(result.user);
+    }
+  } catch (error) { showAuthMessage(friendlyError(error), true); }
+  finally {
+    submit.disabled = false;
+    submit.textContent = document.getElementById('signUpTab').classList.contains('active') ? 'Create account →' : 'Sign in securely →';
+  }
+};
+window.showGoogleMessage = async function () {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    await ensurePlayerProfile(result.user);
+  } catch (error) { showAuthMessage(friendlyError(error), true); }
+};
+const oldSetLoginMode = window.setLoginMode;
+window.setLoginMode = function (mode) {
+  oldSetLoginMode(mode);
+  document.getElementById('firebaseUsernameField').style.display = mode === 'signup' ? 'block' : 'none';
+};
+document.getElementById('firebaseProfileForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!activeUser) { profileStatus.textContent = 'Please sign in first.'; return; }
+  const displayName = document.getElementById('profileUsername').value.trim();
+  if (!displayName) { profileStatus.textContent = 'Please enter a username.'; return; }
+  try {
+    await update(ref(db, `profiles/${activeUser.uid}`), { displayName: displayName.slice(0, 24), updatedAt: serverTimestamp() });
+    profileStatus.textContent = 'Your player profile was saved to Firebase Realtime Database.';
+  } catch (error) { profileStatus.textContent = `Could not save profile: ${friendlyError(error)} Check your Realtime Database rules.`; }
+});
+onAuthStateChanged(auth, async (user) => {
+  activeUser = user;
+  const loginScreen = document.getElementById('loginScreen');
+  document.getElementById('app').classList.toggle('logged-out', !user);
+  loginScreen.style.display = user ? 'none' : 'grid';
+  signOutButton.style.display = user ? 'inline-flex' : 'none';
+  if (!user) { profileStatus.textContent = 'Sign in to load your Firebase player profile.'; return; }
+  try {
+    const displayName = await ensurePlayerProfile(user);
+    document.getElementById('profileUsername').value = displayName;
+    document.getElementById('profileEmail').value = user.email || '';
+    document.getElementById('profileUid').value = user.uid;
+    profileStatus.textContent = 'Connected: your player profile is loaded from Firebase Realtime Database.';
+  } catch (error) { profileStatus.textContent = `Signed in, but profile loading failed: ${friendlyError(error)} Check your database rules.`; }
+});
+</script>
+</body>
+</html>
